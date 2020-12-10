@@ -1,0 +1,48 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title></ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content padding class="login-content">
+  <ion-row>
+      <img class="logo" src="assets/imgs/logo_singarehst.png"/>
+  </ion-row>
+  <div class="login-box">
+    <form (ngSubmit)="login()" #registerForm="ngForm">
+      <ion-row>
+        <ion-col>
+          <ion-list inset>
+
+            <div [hidden]="!error" class="alert alert-danger alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <strong>Aviso!</strong> Nome de usuário ou senha incorretos.
+            </div>
+
+            <!-- <ion-item> -->
+              <ion-input-mask type="text" placeholder="CPF" [clearIfNotMatch]="true" [dropSpecialCharacters]="false" mask="999.999.999-99" name="cpf" [(ngModel)]="cpf" autocomplete="off" required></ion-input-mask>
+            <!-- </ion-item> -->
+
+            <ion-item>
+              <ion-input type="password" placeholder="Senha" name="password" [(ngModel)]="password" required></ion-input>
+            </ion-item>
+
+          </ion-list>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col class="signup-col">
+          <button ion-button class="submit-btn" full type="submit" [disabled]="!registerForm.form.valid">Login</button>
+          <ion-item no-lines style="background-color: #fff0">
+              <ion-label style="text-align: left; margin-top: 4px; color: #488aff">Mantenha-me conectado</ion-label>
+              <ion-checkbox [(ngModel)]="keepConnected" name="keepConnected" clear style="margin-top: 0px; margin-right: 20px"></ion-checkbox>
+          </ion-item>
+          <button ion-button class="register-btn" block clear (click)="recuperarSenha()">Recuperar senha</button>
+        </ion-col>
+      </ion-row>
+
+    </form>
+    <button ion-button class="register-btn" block clear (click)="criarUsuario()">Cadastrar</button>
+
+  </div>
+</ion-content>

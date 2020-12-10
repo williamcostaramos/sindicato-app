@@ -1,0 +1,23 @@
+<ion-header>
+    <ion-navbar>
+      <ion-title>Convênios</ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content padding>
+    <h3>Convênios do Singarehst!</h3>
+    <ion-list>
+      <ion-item *ngFor="let convenio of convenios" text-wrap>
+        <ion-row><ion-col col-12 style="text-align: center"><p>{{convenio.texto}}</p></ion-col></ion-row>
+        <ion-row>
+          <ion-col col-12><img style="width:100%" src="{{convenio.urlImg}}"/></ion-col>
+        </ion-row>
+      </ion-item>
+    </ion-list>
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content
+          loadingText="Carregando...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll> 
+  </ion-content>
+  

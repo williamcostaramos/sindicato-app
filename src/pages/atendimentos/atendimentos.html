@@ -1,0 +1,23 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Atendimentos</ion-title>
+        <ion-buttons end>
+        <button ion-button icon-only (click)="abrirAtendimento()">
+            <ion-icon name="md-add-circle"></ion-icon>
+        </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-item *ngFor="let atendimento of atendimentos" text-wrap>
+        <ion-row><p><strong>Tipo: {{atendimento.tipoatendimento.descricao}}</strong></p></ion-row>
+        <ion-row><p>Assunto: {{atendimento.assunto}}</p></ion-row>
+        <ion-row><p>Descricao: {{atendimento.descricaoAtendimento}}</p></ion-row>
+    </ion-item>
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content
+            loadingText="Carregando...">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll> 
+</ion-content>

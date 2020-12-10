@@ -1,0 +1,21 @@
+<ion-header>
+    <ion-navbar>
+      <ion-title>Desconto Sindical</ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content padding>
+    <h3>Termos do desconto</h3>
+    <ion-list>
+      <ion-item text-wrap>
+        <ion-row><ion-col col-12 style="text-align: center"><p>Autorizo a Empresa na qual exerço a minha função, a descontar do meu Salário base mensal o correspondente a R$ 20,00 (vinte reais), a título de contribuição associativa que será repassado ao SINGAREHST - Sindicato dos Garçons e Empregados em Hotéis, Bares, Restaurantes e Similares do Estado de Tocantins, em boleto próprio que será fornecido pelo Sindicato.</p></ion-col></ion-row>
+      </ion-item>
+    </ion-list>
+
+    <ion-row *ngIf="!termoAceito">
+      <ion-col col-12>
+        <button ion-button class="submit-btn" full type="button" (click)="aceitarTermo()">Aceitar Termos</button>
+      </ion-col>
+    </ion-row>
+  </ion-content>
+  

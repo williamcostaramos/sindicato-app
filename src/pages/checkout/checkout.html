@@ -1,0 +1,82 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Checkout</ion-title>
+    </ion-navbar>
+</ion-header>
+    
+<ion-content padding class="checkout">
+    <form (submit)="sendPayment()" [formGroup]="pagamentoForm" novalidate>
+        <ion-list>
+            <ion-row>
+                <ion-col col-12>
+                    <ion-item>
+                        <ion-label color="primary" floating>Número do cartão</ion-label>
+                        <ion-input type="text" name="num" [(ngModel)]="creditCard.num" formControlName="num" required></ion-input>
+                    </ion-item>
+                    <h6 *ngIf="(!pagamentoForm.controls.num.valid && pagamentoForm.controls.num.dirty) || (!pagamentoForm.controls.num.valid && errorForm)" class="error">Num. do cartão obrigatório</h6>
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col col-12>
+                    <ion-item>
+                        <ion-label color="primary" floating>Nome Impresso no Cartão</ion-label>
+                        <ion-input type="text" value="" [(ngModel)]="creditCard.nomeTitular" formControlName="nomeTitular" required></ion-input>
+                    </ion-item>
+                    <h6 *ngIf="(!pagamentoForm.controls.nomeTitular.valid && pagamentoForm.controls.nomeTitular.dirty) || (!pagamentoForm.controls.nomeTitular.valid && errorForm)" class="error">Nome é obrigatório</h6>
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col col-12>
+                    <ion-item>
+                        <ion-label color="primary" floating>CPF do Titular</ion-label>
+                        <ion-input type="text" name="cpfTitular" (input)="cpf_mask($event.target.value)" maxlength="14" [(ngModel)]="creditCard.cpfTitular" formControlName="cpfTitular" required></ion-input>
+                    </ion-item>
+                    <h6 *ngIf="(!pagamentoForm.controls.cpfTitular.valid && pagamentoForm.controls.cpfTitular.dirty) || (!pagamentoForm.controls.cpfTitular.valid && errorForm)" class="error">CPF é obrigatório</h6>
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col col-6>
+                    <ion-item>
+                        <ion-label color="primary" floating>Data de Expiração</ion-label>
+                        <!-- <ion-select></ion-select> -->
+                        <ion-datetime type="text" [(ngModel)]="creditCard.dateExp" formControlName="dateExp" max="{{maxYear}}"
+                                        displayFormat="MM/YYYY"
+                                        doneText="Ok"
+                                        cancelText="Cancelar" required></ion-datetime>
+                    </ion-item>
+                    <h6 *ngIf="(!pagamentoForm.controls.dateExp.valid && pagamentoForm.controls.dateExp.dirty) || (!pagamentoForm.controls.dateExp.valid && errorForm)" class="error">Mês obrigatório</h6>
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col col-12>
+                    <ion-item>
+                        <ion-label color="primary" floating>Código de segurança</ion-label>
+                        <ion-input type="text" [(ngModel)]="creditCard.cvv" formControlName="cvv" required></ion-input>
+                    </ion-item>
+                    <h6 *ngIf="(!pagamentoForm.controls.cvv.valid && pagamentoForm.controls.cvv.dirty) || (!pagamentoForm.controls.cvv.valid && errorForm)" class="error">Código de segurança obrigatório</h6>
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col col-12>
+                    <ion-item>
+                        <ion-label color="primary" floating>Email</ion-label>
+                        <ion-input type="text" [(ngModel)]="creditCard.email" formControlName="email"></ion-input>
+                    </ion-item>
+                    <h6 *ngIf="(!pagamentoForm.controls.email.valid && pagamentoForm.controls.email.dirty) || (!pagamentoForm.controls.email.valid && errorForm)" class="error">Email obrigatório</h6>
+                </ion-col>
+            </ion-row>
+
+        </ion-list>
+        <button ion-button ion-button class="submit-btn" full type="submit">Pagar</button> 
+    </form>
+    <div style="padding-top: 10px">
+        <ion-col col-12>
+            <img *ngFor="let brand of brands" style="width:42px" src="https://stc.pagseguro.uol.com.br{{brand.images.SMALL.path}}"/>
+        </ion-col>
+    </div>
+</ion-content>

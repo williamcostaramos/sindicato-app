@@ -1,0 +1,58 @@
+<ion-header color="primary">
+    <ion-navbar>
+        <ion-title>Abrir Atendimento</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <form (submit)="abrirAtendimento(atendimentoForm)" #atendimentoForm="ngForm">
+        <ion-list inset>
+
+            <div [hidden]="!error" class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <strong>Aviso!</strong> Erro no formulário.
+            </div>
+
+            <ion-row>
+                <ion-col col-8>
+                    <ion-item style="padding-left: 0px">
+                        <ion-label color="primary" floating>Tipo de Atendimento</ion-label>
+                        <ion-select name="tipoAtendimento_id" [(ngModel)]="atendimento.tipoAtendimento_id" okText="Ok" cancelText="Cancelar" required>
+                            <ion-option *ngFor="let tipo of tiposAtendimento" [value]="tipo.id">{{tipo.descricao}}</ion-option>
+                        </ion-select>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col col-6>
+                    <ion-item>
+                        <ion-label color="primary" floating>Assunto</ion-label>
+                        <ion-input type="text" name="assunto" [(ngModel)]="atendimento.assunto" required></ion-input>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col col-12>
+                    <ion-item>
+                        <ion-label color="primary" floating>Descrição</ion-label>
+                        <ion-textarea rows="4" name="descricaoAtendimento" [(ngModel)]="atendimento.descricaoAtendimento"></ion-textarea>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+
+            
+
+        </ion-list>
+
+
+        <ion-row>
+            <ion-col class="signup-col">
+                <button ion-button class="submit-btn" full type="submit" [disabled]="!atendimentoForm.form.valid">Salvar</button>
+            </ion-col>
+        </ion-row>
+
+    </form>
+</ion-content>

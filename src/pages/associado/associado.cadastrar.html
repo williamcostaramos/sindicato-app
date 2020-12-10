@@ -1,0 +1,190 @@
+<ion-header color="primary">
+    <ion-navbar>
+        <ion-title>CADASTRE-SE</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="login-content" padding>
+    <div class="login-box">
+
+        <ion-row>
+            <ion-col col-10>
+                <ion-input-mask type="text" placeholder="CPF" [clearIfNotMatch]="true" [dropSpecialCharacters]="false" mask="999.999.999-99" name="cpf" [(ngModel)]="associado.CPF" required></ion-input-mask>
+            </ion-col>
+            <ion-col col-2>
+                <ion-buttons end>
+                    <button ion-button icon-only (click)="getAssociado()">
+                        <ion-icon name="search"></ion-icon>
+                    </button>
+                </ion-buttons>
+            </ion-col>
+        </ion-row>   
+
+        <form (submit)="cadastrar()" [formGroup]="associadoForm" novalidate>
+            <ion-list inset>
+
+                <div [hidden]="!error" class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <strong>Aviso!</strong> Erro no cadastro.
+                </div>
+                <div *ngIf="success">
+                    <ion-row>
+                        <ion-col col-12>
+                            <ion-item>
+                                <ion-label color="primary" floating>Nome Completo</ion-label>
+                                <ion-input type="text" name="nome" [(ngModel)]="associado.nome" formControlName="nome" required></ion-input>
+                            </ion-item>
+                            <h6 *ngIf="(!associadoForm.controls.nome.valid && associadoForm.controls.nome.dirty) || (!associadoForm.controls.nome.valid && errorForm)" class="error">Nome obrigatório</h6>
+                        </ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col col-6>
+                            <ion-item>
+                                <ion-label color="primary" floating>Senha</ion-label>
+                                <ion-input type="password" name="senha" [(ngModel)]="associado.senha" formControlName="senha" required></ion-input>
+                            </ion-item>
+                            <h6 *ngIf="(!associadoForm.controls.senha.valid && associadoForm.controls.senha.dirty) || (!associadoForm.controls.senha.valid && errorForm)" class="error">Senha obrigatório</h6>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-8>
+                            <ion-item>
+                                <ion-label color="primary" stacked>Data de Nascimento</ion-label>
+                                <ion-datetime type="date" name="dataNascimento" [(ngModel)]="associado.dataNascimento" formControlName="dataNascimento" required autofocus
+                                monthNames="janeiro, fevereiro, março, abril, maio, junho, julho, agosto, setembro, outubro, novembro, dezembro"
+                                displayFormat="DD/MM/YYYY"
+                                doneText="Ok"
+                                cancelText="Cancelar"></ion-datetime>
+                            </ion-item>
+                            <h6 *ngIf="(!associadoForm.controls.dataNascimento.valid && associadoForm.controls.dataNascimento.dirty) || (!associadoForm.controls.dataNascimento.valid && errorForm)" class="error">Data nascimento obrigatório</h6>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-8>
+                            <ion-item>
+                                <ion-label color="primary" floating>Sexo</ion-label>
+                                <ion-select name="sexo" [(ngModel)]="associado.sexo" formControlName="sexo" okText="Ok" cancelText="Cancelar" required>
+                                    <ion-option value="M">Masculino</ion-option>
+                                    <ion-option value="F">Feminino</ion-option>
+                                </ion-select>
+                            </ion-item>
+                            <h6 *ngIf="(!associadoForm.controls.sexo.valid && associadoForm.controls.sexo.dirty) || (!associadoForm.controls.sexo.valid && errorForm)" class="error">Sexo obrigatório</h6>
+                        </ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col col-8>
+                            <ion-item>
+                                <ion-label color="primary" floating>Estado Civil</ion-label>
+                                <ion-select name="estadoCivil" [(ngModel)]="associado.estadoCivil" formControlName="estadoCivil" okText="Ok" cancelText="Cancelar" required>
+                                    <ion-option value="0">Solteiro(a)</ion-option>
+                                    <ion-option value="2">Casado(a)</ion-option>
+                                    <ion-option value="3">Separado(a)</ion-option>
+                                    <ion-option value="4">Divorciado(a)</ion-option>
+                                    <ion-option value="1">União Estável</ion-option>
+                                    <ion-option value="5">Viúvo(a)</ion-option>
+                                </ion-select>
+                            </ion-item>
+                            <h6 *ngIf="(!associadoForm.controls.estadoCivil.valid && associadoForm.controls.estadoCivil.dirty) || (!associadoForm.controls.estadoCivil.valid && errorForm)" class="error">Estado civil obrigatório</h6>
+                        </ion-col>
+                    </ion-row>
+                    
+                    <ion-row>
+                        <ion-col col-12>
+                            <ion-item>
+                                <ion-label color="primary" floating>Nome da Mãe</ion-label>
+                                <ion-input type="text" name="nomeMae" [(ngModel)]="associado.nomeMae" formControlName="nomeMae" required></ion-input>
+                            </ion-item>
+                            <h6 *ngIf="(!associadoForm.controls.nomeMae.valid && associadoForm.controls.nomeMae.dirty) || (!associadoForm.controls.nomeMae.valid && errorForm)" class="error">Nome da mãe obrigatório</h6>
+                        </ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col col-12>
+                            <ion-item>
+                                <ion-label color="primary" floating>Nome do Pai</ion-label>
+                                <ion-input type="text" name="nomePai" [(ngModel)]="associado.nomePai" formControlName="nomePai" required></ion-input>
+                            </ion-item>
+                            <h6 *ngIf="(!associadoForm.controls.nomePai.valid && associadoForm.controls.nomePai.dirty) || (!associadoForm.controls.nomePai.valid && errorForm)" class="error">Nome do pai obrigatório</h6>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-12>
+                            <ion-item>
+                                <ion-label color="primary" floating>Celular</ion-label>
+                                <ion-input type="text" name="celular" (input)="phone_mask($event.target.value)" [(ngModel)]="associado.celular" formControlName="celular" maxlength="15" required></ion-input>
+                            </ion-item>
+                            <h6 *ngIf="(!associadoForm.controls.celular.valid && associadoForm.controls.celular.dirty) || (!associadoForm.controls.celular.valid && errorForm)" class="error">Celular obrigatório</h6>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-12>
+                            <ion-item>
+                                <ion-label color="primary" floating>Email</ion-label>
+                                <ion-input type="email" name="email" [(ngModel)]="associado.email" formControlName="email" required></ion-input>
+                            </ion-item>
+                            <h6 *ngIf="(!associadoForm.controls.email.valid && associadoForm.controls.email.dirty) || (!associadoForm.controls.email.valid && errorForm)" class="error">Email obrigatório</h6>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-12>
+                            <ion-item no-lines>
+                                <ion-label color="primary" stacked>Free lancer</ion-label>
+                                <ion-checkbox name=freelancer [(ngModel)]="associado.freelancer" [ngModelOptions]="{standalone: true}"></ion-checkbox>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+
+                    <ion-row style="padding-top: 15px">
+                        <ion-col col-10>
+                            <ion-input-mask type="text" placeholder="CNPJ da Empresa" [clearIfNotMatch]="true" [dropSpecialCharacters]="false" mask="99.999.999/9999-99" name="cnpj" [(ngModel)]="cnpjEmpresa" [ngModelOptions]="{standalone:true}"></ion-input-mask>
+                        </ion-col>
+                        <ion-col col-2>
+                            <ion-buttons end>
+                                <button ion-button icon-only type="button" (click)="getEmpresa()">
+                                    <ion-icon name="search"></ion-icon>
+                                </button>
+                            </ion-buttons>
+                        </ion-col>
+                    </ion-row>
+                    <div *ngIf="associado.empresa_id" style="padding-top:15px">
+                        <ion-row>
+                            <ion-col col-12>
+                                <ion-item>
+                                    <ion-label color="primary" floating>Nome Fantasia</ion-label>
+                                    <ion-input type="text" name="nomeFantasia" [(ngModel)]="nomeFantasia" [ngModelOptions]="{standalone: true}" disabled></ion-input>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+
+                        <ion-row>
+                            <ion-col col-12>
+                                <ion-label color="primary" stacked>Termos de autorização</ion-label>
+                                <ion-textarea rows="4" name="termos" [(ngModel)]="termos" [ngModelOptions]="{standalone: true}" disabled></ion-textarea>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col col-12>
+                                <ion-item no-lines>
+                                    <ion-label color="primary" stacked>Concordo</ion-label>
+                                    <ion-checkbox name=termoAceito [(ngModel)]="associado.termoAceito" [ngModelOptions]="{standalone: true}"></ion-checkbox>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                    </div>
+                </div>
+
+            </ion-list>
+
+
+            <ion-row>
+                <ion-col class="signup-col">
+                    <button ion-button class="submit-btn" full type="submit" [disabled]="!success">Salvar</button>
+                </ion-col>
+            </ion-row>
+
+        </form>
+    </div>
+</ion-content>

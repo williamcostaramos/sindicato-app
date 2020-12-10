@@ -1,0 +1,21 @@
+page-recuperarSenha{
+    .login-content{
+        background: url('../../assets/imgs/bg-login-min.jpg') no-repeat;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        background-size: cover;
+    }
+
+    .alert{
+        color: #ffffff;
+    }
+
+    .login-box{
+        margin-top: 100px;
+    }
+
+    .logo-row{
+        width: 80%;
+        margin: 0 auto;
+    }
+}

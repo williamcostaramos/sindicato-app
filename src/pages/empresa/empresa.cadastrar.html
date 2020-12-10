@@ -1,0 +1,99 @@
+<ion-header color="primary">
+    <ion-navbar>
+        <ion-title>CADASTRE-SE</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="login-content" padding>
+    <div class="login-box">
+        <ion-row>
+            <ion-col col-10>
+                <ion-input-mask type="text" placeholder="CNPJ" [clearIfNotMatch]="true" [dropSpecialCharacters]="false" mask="99.999.999/9999-99" name="cnpj" [(ngModel)]="empresa.cnpj" required></ion-input-mask>
+            </ion-col>
+            <ion-col col-2>
+                <ion-buttons end>
+                    <button ion-button icon-only (click)="getEmpresa()">
+                        <ion-icon name="search"></ion-icon>
+                    </button>
+                </ion-buttons>
+            </ion-col>
+        </ion-row>   
+        <form (submit)="cadastrar()" [formGroup]="empresaForm" novalidate>
+            <ion-list inset>
+
+                <div [hidden]="!error" class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <strong>Aviso!</strong> Erro no cadastro.
+                </div>
+ 
+                <div *ngIf="success">
+                    <ion-row>
+                        <ion-col col-12>
+                            <ion-item>
+                                <ion-label color="primary" floating>Razão Social</ion-label>
+                                <ion-input type="text" name="razaoSocial" [(ngModel)]="empresa.razaoSocial" [ngModelOptions]="{standalone: true}" disabled></ion-input>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-12>
+                            <ion-item>
+                                <ion-label color="primary" floating>Nome Fantasia</ion-label>
+                                <ion-input type="text" name="nomeFantasia" [(ngModel)]="empresa.nomeFantasia" [ngModelOptions]="{standalone: true}" disabled></ion-input>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-12>
+                            <ion-item>
+                                <ion-label color="primary" floating>Endereço</ion-label>
+                                <ion-input type="text" name="endereco" [(ngModel)]="empresa.endereco" [ngModelOptions]="{standalone: true}" disabled></ion-input>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-8>
+                            <ion-item>
+                                <ion-label color="primary" floating>Insc. Estadual</ion-label>
+                                <ion-input type="text" name="inscricaoEstadual" [(ngModel)]="empresa.inscricaoEstadual" [ngModelOptions]="{standalone: true}" disabled></ion-input>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-6>
+                            <ion-item>
+                                <ion-label color="primary" floating>Telefone</ion-label>
+                                <ion-input type="text" name="fone" [(ngModel)]="empresa.fone" [ngModelOptions]="{standalone: true}" maxlength="15" disabled></ion-input> 
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-6>
+                            <ion-item>
+                                <ion-label color="primary" floating>Email</ion-label>
+                                <ion-input type="email" name="email" [(ngModel)]="empresa.email" maxlength="255" formControlName="email" required></ion-input> 
+                            </ion-item>
+                            <h6 *ngIf="(!empresaForm.controls.email.valid && empresaForm.controls.email.dirty) || (!empresaForm.controls.email.valid && errorForm)" class="error">Email obrigatório</h6>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-6>
+                            <ion-item>
+                                <ion-label color="primary" floating>Senha</ion-label>
+                                <ion-input type="password" name="senha" [(ngModel)]="empresa.senha" formControlName="senha" required></ion-input>
+                            </ion-item>
+                            <h6 *ngIf="(!empresaForm.controls.senha.valid && empresaForm.controls.senha.dirty) || errorSenha" class="error">Senha obrigatória</h6>
+                        </ion-col>
+                    </ion-row>
+                </div>            
+            </ion-list>
+
+            <ion-row>
+                <ion-col class="signup-col">
+                    <button ion-button class="submit-btn" full [disabled]="!success">Salvar</button>
+                </ion-col>
+            </ion-row>
+
+        </form>
+    </div>
+</ion-content>

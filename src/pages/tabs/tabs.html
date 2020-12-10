@@ -1,0 +1,15 @@
+
+<ion-tabs *ngIf="user.role == 'associado'">
+  <ion-tab [root]="tab1Root.component" tabTitle="{{tab1Root.title}}" tabIcon="{{tab1Root.icon}}"></ion-tab>
+  <ion-tab [root]="tab2Root.component" tabTitle="{{tab2Root.title}}" tabIcon="{{tab2Root.icon}}"></ion-tab>
+  <ion-tab [root]="tab3Root.component" tabTitle="{{tab3Root.title}}" tabIcon="{{tab3Root.icon}}"></ion-tab>
+  <ion-tab [root]="tab4Root.component" tabTitle="{{tab4Root.title}}" tabIcon="{{tab4Root.icon}}"></ion-tab>
+  <ion-tab (ionSelect)="openMenu()" menuToggle tabIcon="menu"></ion-tab>
+</ion-tabs>
+
+<ion-tabs *ngIf="user.role == 'empresa'">
+  <ion-tab [root]="tab1Root.component" tabTitle="{{tab1Root.title}}" tabIcon="{{tab1Root.icon}}"></ion-tab>
+  <ion-tab [root]="tab2Root.component" tabTitle="{{tab2Root.title}}" tabIcon="{{tab2Root.icon}}"></ion-tab>
+  <ion-tab [root]="tab3Root.component" tabTitle="{{tab3Root.title}}" tabIcon="{{tab3Root.icon}}"></ion-tab>
+  <ion-tab (ionSelect)="openMenu()" menuToggle tabIcon="menu"></ion-tab>
+</ion-tabs>
